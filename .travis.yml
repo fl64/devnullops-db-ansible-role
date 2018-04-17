@@ -12,13 +12,14 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_c5958a5e2039_key -iv $encrypted_c5958a5e2039_iv
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
-- echo $GCE_CREDENTIALS_FILE
+
 - mv google_compute_engine /home/travis/.ssh/
 - chmod 0600 /home/travis/.ssh/google_compute_engine
-- echo $GCE_CREDENTIALS_FILE
 install:
 - pip install ansible==2.5.0 molecule==2.6 apache-libcloud
 script:
+- ls -lha
+- echo $GCE_CREDENTIALS_FILE
 - molecule --debug create
 - molecule --debug converge
 - molecule --debug verify
