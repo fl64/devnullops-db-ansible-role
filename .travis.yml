@@ -1,8 +1,6 @@
 language: python
 python:
 - '2.7'
-install:
-- pip install ansible==2.3.0 molecule apache-libcloud
 env:
   global:
   - secure: ZXVwoj2N7UgMe9kEKwDH1OUaG0EddPSRvb0vJ9uNjiRavdU73C+dRaBOTs5WYDNKJrD4Hf2mbPzegN5XruOOLLVX/st7TGK2gcxE5pDv26H71SE2yNsZO4Qp/aSOBMEjFCdsptNHHc/FSHe/TP0L7j0YGv9sY8gnpHtKSELspTX0mGCcKVGRsTXUhl4+KQlGaRFyYa2y7sVZ6Ctw9lmfHr3XWU24YJDzeRcoazkNnKZdZiQBMpPDlpe/Ttqo4zGARxL11yeACdWQ9H2DZDzgBECsjCjMaFLoOI6PmvuZMSr+69V47JzgpMLfh7WeQwn6fGks52oELU/dW1/YaXsnQL0oN1ln0+OV9x1a6sbR0MGJjMhY9OoiS7DMOdEIowQ0jsynICCP+6ftsWnj+P2XEqXsX8cB2Gv5SnsaEwQEi3EFktyuCZkhhe+9dQ+3P5TlqeXMfFATifX9X5vjptJU/vt3Sxc7OGADQ6dkq7URYqRCYXkyo5BaG6AlC1+Cl7gWzl3aclPN+H7jEeilEgxaMSlmz1A/EqHA8lQ5c4nJqK7DbV/qY8VirlC/KDitB8CEWMho2HyGV0XIgusRpzzn7y46PahaF0EDGvfmKOTWCGFqv6+ZFFmYl6uDkLnlfpntEAED3RIhGisNa2zjU3PgCtHartC84JRq/dUtDflRTPA=
@@ -14,7 +12,7 @@ before_install:
 - 'mv google_compute_engine /home/travis/.ssh/'
 - 'chmod 0600 /home/travis/.ssh/google_compute_engine'
 install:
-  - 'pip install -r requirements.txt'
+- pip install ansible==2.5.0 molecule==2.6 apache-libcloud
 script:
   - 'molecule create'
   - 'molecule converge'
