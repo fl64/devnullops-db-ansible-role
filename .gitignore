@@ -16,3 +16,8 @@ vault.key
 .cache
 .pytest_cache
 .venv/
+
+*.tar
+*.pub
+credentials.json
+google_compute_engine
