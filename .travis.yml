@@ -2,10 +2,12 @@ language: python
 python:
 - '2.7'
 env:
+  matrix:
+  - GCE_CREDENTIALS_FILE="$(pwd)/credentials.json"
   global:
-  - GCE_CREDENTIALS_FILE="${TRAVIS_BUILD_DIR}/credentials.json
   - secure: HIfytxHyzotyjH1mxGFciQUt5ydm0DbquYIVzIaZQ9Dr+eK+G1DkCXjx2QGtAs8bX6OPag/2tlmBIufCq1zV7J/HotEbeU5baDrcyM7Rh2m7sIxGADwxp5ZEjxIWYG1oyLZcxkH5bmJP9qjmF18hzATYde2myd08a2HHswax1r1nO+TEEBmXETF6hlJjJDLNrGH6WdrfKvJkfOaY2lhLTD2MWKNepSZ6zscOioAOW81Q2l1nJa4Tn4HyGtkHTRtML4+b/wp2lOLVjAI3NuFaI4UOu8eF4q7E0Mp2INDFEQVK2Rel1rsmBO9YMtEVZ4qU+j3kUyiK0zpTcikzqslWH29hFrv+UyfwsNE1/aVoH9OsjS8Z1/a2JVBDy0dmgVknyLGcYwoG7oZoOkJdv+I0Um9QpLOEaz8FuQXS/v9qIFSttn5Vzw3vK10OST6iE2Ih/BuRRZJb8mH7V27R1rgmFVLQ8SOIE2sx8TabpAIOlnsfi5gk89aSxHj0l8YUVWFssLjid1nILHNfWk2bV9QyKudqaQhVE0EyMo8gsgriOZ9e0l+9ryqyCtUP7tu/+dK0txBBxJysFYJUY0af+aoGAoiT2Pb4BYZkItgV0sugN3HzzAIGad3ggriRoyVYakJixWsQ54GbPBfB3zkuMct7mh2KRfBjuY9q95GLhutda5U=
   - secure: f7OAO04ZkcigbILHFWftW/I8bBMSI6cS4bk430mojeQI36LYxPiVWdae0lYV51lDkA0wfYAKFglX0By55qjP1G0VT1GCfJKI79u27qdb3dPLT4gmt1EPFBEA3M2Dkxbw+stgGUqwFsn/QAvI05AWXy+qcwyF0+at3b4uKY/JZuiCEqV8e3oCXb/6664y5rdFJW3C4NgkW7I7MoiLqKVkFZ6cpBok9JEul9BF1UNC5CqjzmjX9FZUmINceFligSMxluiasW+U4VrB2xFtoeY8Cns5kvtGg9mjJZg8N+HTbWTCknIOGwXoIcIeJHbOoHeakVP3VMp3ZTq2sqsJbBD4Ynx4diAw2IvBdXASCZnydcfd09/UvRVwTUC7tkprc0Me/i70QDm8RngmVNuNHOgcLS8ABMdure8MfblfczF8JWpnO+/Py7YiOXYHbmYAYNzQTygMbVS5pT7ZDbpmLRttg1RrF/4FEhqjQ42agYOdZNn+xNKX/FWrBFWYy9/DoV1zZr4qzV+30IkPD0hP3gp4dQKgyc169xYtGl16J0H1Unl8ozMcrAc47H7/jAV2uRJ8O8fHoSV6rx5T3g1UiuJ+YRxl41Wkf984tj0N2xCM9OYPRf9SNz+M8P5jqYERKA+LxTGYiNKHUFXZpVaMw6KvD30xSNiZXnWiwN2q+TbEX0k=
+  - secure: vvATugBEr2wd51wTDygH5rzEF9UY+7Vxfahek+tFjp4659Gnu3mY6z2B/030IdY4HMOQEW7iExFxgJo8EnqUP/g+I6vna3zhLH9juxjd1KWYmsXAErIDHSCNj8XJf/FQQuKbg31ui0SqKuF9asIzCB/6EZzFyWEQeQWPCBbE+1I4fGEboBkOpH4TKbkPyfkta+oL79uJYEOCKHLf5WGZiEbsW2Z138JAoQ2Kr498IilXJORQFLfPNBbui1JsdWUoPEpGPLf9yjNrULBUH8kAOJ9UA5P1ENShNkRPG/CL7PgVQgw7jNyrEuXlZuMjvoONyNjbqzUkWf1ZFadNXSzFLSM6s9LpOpE/7Lu7mEwiL7l3CeHOAEBmmAOyLg2Bqauxzq4Fxokq5vcgWdHGIgq/rVRRStKyltF+Uk3SEU+ScQT5WcITDafKD6PB51SkvpsjrXnKLcsN7/UFv1XnFdf4zPKcQpA8rQv6IMPE9xSOfK3F/N/qygERnboH+Lj/KTcY2sZdQv1MeLVLWYA8mwjJ3sqcBkh0Hu+05c0TFvO4L/SgRBRBl917dgZ5gf5jMl6DqHd41vl7LKndW8RWslw31MG/RElEVKt2lZlRKYUrQYzKHoSY9e/8tkN+GbzaMzR9Gig6R4aovvUC5DcU5/PR7cS6C8xP9G2npk+NwGZERvM=
 before_install:
 - openssl aes-256-cbc -K $encrypted_c5958a5e2039_key -iv $encrypted_c5958a5e2039_iv
   -in secrets.tar.enc -out secrets.tar -d
@@ -13,7 +15,8 @@ before_install:
 - mv google_compute_engine /home/travis/.ssh/
 - chmod 0600 /home/travis/.ssh/google_compute_engine
 install:
-- pip install ansible==2.5.0 molecule==2.12.1 ansible-lint==3.4.19 apache-libcloud PyCrypto
+- pip install ansible==2.5.0 molecule==2.12.1 ansible-lint==3.4.19 apache-libcloud
+  PyCrypto
 script:
 - molecule --debug create
 - molecule --debug converge
