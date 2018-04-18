@@ -3,7 +3,7 @@
 devnullops-db-ansible-role
 =========
 
-OTUS DevOps homework #13*
+OTUS DevOps homework #12*
 
 Requirements
 ------------
